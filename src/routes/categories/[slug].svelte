@@ -19,7 +19,7 @@
 </script>
 
 <main>
-	<h1 class="text-4xl text-center my-8 uppercase">{category}</h1>
+	<h1 class="text-4xl text-center my-8 uppercase">{category} reviews</h1>
 	<p>pages: {pages}</p>
 	{#await reviews}
 		<h1>Loading reviews...</h1>

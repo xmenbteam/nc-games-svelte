@@ -9,8 +9,8 @@
 		<ul>
 			<li class="inline text-4lg"><a class="overflow-scroll mx-4" href={`/`}>home</a></li>
 			{#each categories as category}
-				<li class="inline" value={`categories/${category.slug}`}>
-					<a class="overflow-scroll mx-4 text-2lg inline" href={`/categories/${category.slug}`}>
+				<li class="inline mx-4 text-2lg" value={`categories/${category.slug}`}>
+					<a href={`/categories/${category.slug}`}>
 						{category.slug}
 					</a>
 				</li>
