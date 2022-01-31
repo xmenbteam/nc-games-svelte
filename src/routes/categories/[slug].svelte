@@ -3,24 +3,34 @@
 
 	export const load = async ({ params }) => {
 		const category = params.slug;
-		const response = await get('https://sam-p-nc-games-ts.herokuapp.com/api/reviews', {
+		const { data } = await get('https://sam-p-nc-games-ts.herokuapp.com/api/reviews', {
 			params: { category }
 		});
-		return { props: { reviews: response.data.reviews, pages: response.data.pages, category } };
+		const { reviews, pageTotal, currentPage } = data;
+		return {
+			props: {
+				reviews,
+				pageTotal,
+				currentPage,
+				category
+			}
+		};
 	};
 </script>
 
 <script>
+	import Pages from '../../components/Pages.svelte';
 	import ReviewCard from '../../components/ReviewCard.svelte';
 
 	export let reviews;
-	export let pages;
+	export let pageTotal;
+	export let currentPage;
 	export let category;
 </script>
 
 <main>
 	<h1 class="text-4xl text-center my-8 uppercase">{category} reviews</h1>
-	<p>pages: {pages}</p>
+	<Pages {currentPage} {pageTotal} />
 	{#await reviews}
 		<h1>Loading reviews...</h1>
 	{:then reviews}

@@ -6,12 +6,8 @@
 		const reviewResponse = await get(
 			`https://sam-p-nc-games-ts.herokuapp.com/api/reviews/${review_id}`
 		);
-		// const commentResponse = await get(
-		// 	`https://sam-p-nc-games-ts.herokuapp.com/api/reviews/${review_id}/comments`
-		// );
+
 		const review = reviewResponse.data.review;
-		// let comments = commentResponse.data.comments;
-		// if (!comments) comments = [];
 		return {
 			props: { review }
 		};
@@ -21,7 +17,6 @@
 <script>
 	import ReviewPage from '../../components/ReviewPage.svelte';
 	export let review;
-	// export let comments;
 </script>
 
 <div>

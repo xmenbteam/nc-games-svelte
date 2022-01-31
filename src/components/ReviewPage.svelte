@@ -2,7 +2,6 @@
 	import CommentsContainer from './CommentsContainer.svelte';
 	import Voter from './Voter.svelte';
 	export let review;
-	// export let comments;
 	export let showComments = false;
 
 	const handleShowComments = () => {
@@ -18,9 +17,9 @@
 	<p>By {review.owner}</p>
 	<p class="m-1 p-4 bg-red-100 rounded-md">{review.review_body}</p>
 	<p class="text-sm py-1">Created at: {new Date(review.created_at)}</p>
-	<Voter votes={review.votes} />
+	<Voter id={review.review_id} votes={review.votes} type="reviews" />
 	<button on:click={handleShowComments}>{showComments ? 'Hide Comments' : 'Show Comments'}</button>
-	<!-- {#if showComments}
-		<CommentsContainer {comments} />
-	{/if} -->
+	{#if showComments}
+		<CommentsContainer review_id={review.review_id} />
+	{/if}
 </main>
