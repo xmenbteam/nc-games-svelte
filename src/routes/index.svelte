@@ -3,18 +3,12 @@
 	import axios from 'axios';
 
 	import ReviewCard from '../components/ReviewCard.svelte';
+	import { getReviews } from '../api/reviews.api';
 	import Pages from '../components/Pages.svelte';
 	export let reviews = undefined;
 
 	onMount(async () => {
-		try {
-			const { data } = await axios.get(`https://sam-p-nc-games-ts.herokuapp.com/api/reviews`);
-
-			const { currentPage, pageTotal, reviews: allReviews } = data;
-			reviews = { currentPage, pageTotal, allReviews };
-		} catch (err) {
-			console.log(err);
-		}
+		reviews = await getReviews();
 	});
 </script>
 

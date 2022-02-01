@@ -1,5 +1,5 @@
 <script>
-	import { handleVote } from '../api';
+	import { handleVote } from '../api/utils.api';
 
 	export let votes;
 	export let id;
