@@ -1,9 +1,13 @@
 <script>
-	import { onMount } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import ReviewCard from '../components/ReviewCard.svelte';
 	import { getReviews } from '../api/reviews.api';
 	import Pages from '../components/Pages.svelte';
 	export let reviews;
+
+	setContext('user', {
+		user: 'jessjelly'
+	});
 
 	onMount(async () => {
 		const props = {};

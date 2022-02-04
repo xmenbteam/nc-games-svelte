@@ -1,8 +1,9 @@
 <script>
 	import { getComments } from '../api/comments.api';
-	import { onMount } from 'svelte';
+	import { onMount, getContext } from 'svelte';
 	import CommentCard from './CommentCard.svelte';
 	import Pages from './Pages.svelte';
+	import CommentPoster from './CommentPoster.svelte';
 
 	export let review_id;
 
@@ -21,6 +22,15 @@
 			else isError === true;
 		}
 	});
+
+	const update = async () => {
+		try {
+			const props = { review_id };
+			comments = await getComments(props);
+		} catch (err) {
+			console.log('commentscontainererr', err);
+		}
+	};
 	const handleQuery = async (props) => {
 		comments = await getComments(props);
 	};
@@ -31,7 +41,10 @@
 		<h2>Loading</h2>
 	{:then comments}
 		{#if comments}
-			<Pages {handleQuery} currentPage={comments.currentPage} pageTotal={comments.pageTotal} />
+			{#if comments.pageTotal > 1}
+				<Pages {handleQuery} currentPage={comments.currentPage} pageTotal={comments.pageTotal} />
+			{/if}
+			<CommentPoster {update} {review_id} />
 			{#each comments.allComments as comment}
 				<CommentCard {comment} />
 			{/each}

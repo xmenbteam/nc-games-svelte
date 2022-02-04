@@ -2,17 +2,21 @@
 	import { getReviews } from '../../api/reviews.api';
 
 	export const load = async ({ params }) => {
-		const category = params.slug;
-		const props = { category };
-		const { allReviews: reviews, pageTotal, currentPage } = await getReviews(props);
-		return {
-			props: {
-				reviews,
-				pageTotal,
-				currentPage,
-				category
-			}
-		};
+		try {
+			const category = params.slug;
+			const props = { category };
+			const { allReviews: reviews, pageTotal, currentPage } = await getReviews(props);
+			return {
+				props: {
+					reviews,
+					pageTotal,
+					currentPage,
+					category
+				}
+			};
+		} catch (err) {
+			console.log('[slug].svelte', err);
+		}
 	};
 </script>
 
@@ -34,9 +38,11 @@
 	{#await reviews}
 		<h1>Loading reviews...</h1>
 	{:then reviews}
-		{#each reviews as review}
-			<ReviewCard {review} />
-		{/each}
+		{#if reviews}
+			{#each reviews as review}
+				<ReviewCard {review} />
+			{/each}
+		{/if}
 	{:catch error}
 		<p>{error}</p>
 	{/await}
