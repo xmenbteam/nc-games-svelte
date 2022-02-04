@@ -1,15 +1,18 @@
 <script>
 	import { onMount } from 'svelte';
-	import axios from 'axios';
-
 	import ReviewCard from '../components/ReviewCard.svelte';
 	import { getReviews } from '../api/reviews.api';
 	import Pages from '../components/Pages.svelte';
-	export let reviews = undefined;
+	export let reviews;
 
 	onMount(async () => {
-		reviews = await getReviews();
+		const props = {};
+		reviews = await getReviews(props);
 	});
+
+	const handleQuery = async (props) => {
+		reviews = await getReviews(props);
+	};
 </script>
 
 <svelte:head>
@@ -22,7 +25,7 @@
 		<p>Loading...</p>
 	{:then reviews}
 		{#if reviews}
-			<Pages currentPage={reviews.currentPage} pageTotal={reviews.pageTotal} />
+			<Pages {handleQuery} currentPage={reviews.currentPage} pageTotal={reviews.pageTotal} />
 
 			{#each reviews.allReviews as review}
 				<ReviewCard {review} />

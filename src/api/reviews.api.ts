@@ -1,9 +1,11 @@
 import axios from 'axios';
+import type { ReviewsPropTypes } from 'src/Types/PropTypes';
 
-export const getReviews = async (category) => {
+export const getReviews = async (props: ReviewsPropTypes) => {
+	const { category, page } = props;
 	try {
 		const { data } = await axios.get(`https://sam-p-nc-games-ts.herokuapp.com/api/reviews`, {
-			params: { category }
+			params: { category, page }
 		});
 		const { currentPage, pageTotal, reviews: allReviews } = data;
 
