@@ -2,19 +2,19 @@
 	import { postComment } from '../api/comments.api';
 	const user = 'jessjelly';
 	export let update;
-
 	export let review_id;
 
 	let commentBody = '';
-	const handleSubmit = (e) => {
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const props = {
 			review_id,
 			body: { body: commentBody, username: user }
 		};
-		postComment(props);
+		await postComment(props);
 		commentBody = '';
-		update();
+		update(props);
 	};
 </script>
 

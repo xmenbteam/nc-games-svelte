@@ -14,7 +14,7 @@
 		reviews = await getReviews(props);
 	});
 
-	const handleQuery = async (props) => {
+	const update = async (props) => {
 		reviews = await getReviews(props);
 	};
 </script>
@@ -29,7 +29,7 @@
 		<p>Loading...</p>
 	{:then reviews}
 		{#if reviews}
-			<Pages {handleQuery} currentPage={reviews.currentPage} pageTotal={reviews.pageTotal} />
+			<Pages {update} currentPage={reviews.currentPage} pageTotal={reviews.pageTotal} />
 
 			{#each reviews.allReviews as review}
 				<ReviewCard {review} />

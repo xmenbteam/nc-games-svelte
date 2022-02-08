@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+const url = axios.create({
+	baseURL: 'https://sam-p-nc-games-ts.herokuapp.com/api'
+});
+
 export const handleVote = async (id: string, inc_votes: number, type: string) => {
 	try {
 		const url = `https://sam-p-nc-games-ts.herokuapp.com/api/${type}/${id}`;

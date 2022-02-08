@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+const url = axios.create({
+	baseURL: 'https://sam-p-nc-games-ts.herokuapp.com/api/'
+});
+
 export const getComments = async (props) => {
 	const { review_id } = props;
 	try {
